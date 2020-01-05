@@ -16,7 +16,9 @@
 
 #include QMK_KEYBOARD_H
 #include "my.h"
-#include "my_dynamic_macro.h"
+
+extern bool g_suspend_state;
+extern rgb_config_t rgb_matrix_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Base layer (Qwerty)
@@ -36,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  _________________QWERTY_L1_________________, _________________QWERTY_R1_________________, KC_QUOT,
     CTL_ESC, _________________QWERTY_L2_________________, _________________QWERTY_R2_________________, CTL_ENT,
     KC_LSPO, _________________QWERTY_L3_________________, _________________QWERTY_R3_________________, KC_RSPC,
-    GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  NAV_BSP, RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
+    NAV_BR,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC, RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
   /* Base layer (Colemak)
@@ -126,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     GUI_GRV, _________________LOWER_L1__________________, _________________LOWER_R1__________________, KC_HASH,
     _______, _________________LOWER_L2__________________, _________________LOWER_R2__________________, _______,
     _______, _________________LOWER_L3__________________, _________________LOWER_R3__________________, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______
   ),
 
   /* Symbol layer
@@ -221,26 +223,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ADJUST_LAYER] = LAYOUT_planck_grid_wrapper(
     XXXXXXX, RESET,   SEND_MAKE, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  UC_M_LN, UC_M_OS,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
-    COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
+    COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  LED_LEVEL, DYN_MACRO_PLAY2, DYN_REC_START2,
     STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   LIT_TOG, LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
 
 #ifdef RGB_MATRIX_ENABLE
 void rgb_matrix_indicators_user(void) {
+  planck_ez_left_led_off();
+  planck_ez_right_led_off();
+  if(!keyboard_config.rgb_matrix_enable || g_suspend_state) { return; }
   switch (biton32(layer_state)) {
     case LOWER_LAYER:
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
+      planck_ez_left_led_on();
       break;
     case RAISE_LAYER:
-      rgb_matrix_set_color(44, 0xFF, 0xFF, 0xFF); // RAISE
+      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
+      planck_ez_right_led_on();
       break;
     case NAV_LAYER:
-      rgb_matrix_set_color(43, 0xFF, 0xFF, 0xFF); // NAV_BSP
+      rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // NAV_BSP
       break;
     case GUI_LAYER:
-      rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
-      rgb_matrix_set_color(48, 0xFF, 0xFF, 0xFF); // GUI_R
+      // rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
+      rgb_matrix_set_color(46, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
     case STENO_LAYER:
       rgb_matrix_set_color(36, 0xFF, 0x30, 0x00); // STN_EXIT
@@ -277,8 +284,10 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color(48, 0x00, 0x00, 0x00);
       break;
     case ADJUST_LAYER:
+      planck_ez_left_led_on();
+      planck_ez_right_led_on();
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
-      rgb_matrix_set_color(44, 0xFF, 0xFF, 0xFF); // RAISE
+      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case CAMEL_LAYER:
     case KEBAB_LAYER:
@@ -288,7 +297,5 @@ void rgb_matrix_indicators_user(void) {
       break;
   }
 
-  // Disable middle LED between keys in grid layout.
-  rgb_matrix_set_color(42, 0x00, 0x00, 0x00);
 }
 #endif

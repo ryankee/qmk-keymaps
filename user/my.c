@@ -16,7 +16,6 @@
 
 #include "my.h"
 #include "my_leader.h"
-#include "dynamic_macro.h"
 
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
@@ -35,6 +34,10 @@ void matrix_init_user(void) {
 #endif
 }
 
+void keyboard_post_init_user(void) {
+  rgb_matrix_sethsv(DEFAULT_LED_HUE, DEFAULT_LED_SAT, DEFAULT_LED_BRIGHTNESS);
+}
+
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
 }
@@ -46,7 +49,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (!process_record_dynamic_macro(keycode, record)) {
+  if (!process_dynamic_macro(keycode, record)) {
     return false;
   }
 

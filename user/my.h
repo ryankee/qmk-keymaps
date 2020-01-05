@@ -54,6 +54,7 @@ enum user_keycodes {
   DYNAMIC_MACRO_RANGE
 };
 
+
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
 
@@ -72,6 +73,7 @@ enum user_keycodes {
 #define CAPITAL OSM(MOD_LSFT)
 
 #define NAV_BSP LT(NAV_LAYER, KC_BSPC)
+#define NAV_BR LT(NAV_LAYER, KC_LBRC)
 
 #define GUI_GRV LGUI(KC_GRV)
 
@@ -91,7 +93,7 @@ enum user_keycodes {
 #define WM_S    LALT(LGUI(KC_DOWN))
 #define WM_SW   S(LCTL(LGUI(KC_LEFT)))
 #define WM_W    LALT(LGUI(KC_LEFT))
-#define WM_CNTR LALT(LGUI(KC_C))
+#define WM_CNTR LCTL(LALT(KC_C))
 
 // Unify backlight controls
 #if defined(RGB_MATRIX_ENABLE) || defined(RGBLIGHT_ENABLE)

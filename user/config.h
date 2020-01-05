@@ -31,5 +31,14 @@
 
 #define DYNAMIC_MACRO_SIZE 128
 
+#define DEFAULT_LED_HUE 0
+#define DEFAULT_LED_SAT 0
+#define DEFAULT_LED_BRIGHTNESS 0x99
+
 // Delay needed for rotary encoder to trigger media keys
 #define TAP_CODE_DELAY 10
+#define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
+// Planck EZ colors
+#define ORYX_CONFIGURATOR
+#define PLANCK_EZ_USER_LEDS
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
