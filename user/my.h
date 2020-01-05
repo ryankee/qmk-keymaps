@@ -129,7 +129,7 @@ enum user_keycodes {
 
 #define _________________LOWER_L1__________________ KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
 #define _________________LOWER_L2__________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5
-#define _________________LOWER_L3__________________ KC_MINS, KC_EQL,  KC_GRV,  KC_BSLS, KC_COLN
+#define _________________LOWER_L3__________________ KC_COLN, KC_BSLS, KC_GRV,  KC_EQL,   KC_MINS
 
 #define _________________LOWER_R1__________________ KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10
 #define _________________LOWER_R2__________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0
@@ -137,11 +137,11 @@ enum user_keycodes {
 
 #define _________________RAISE_L1__________________ KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15
 #define _________________RAISE_L2__________________ KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
-#define _________________RAISE_L3__________________ KC_UNDS, KC_PLUS, KC_TILD, KC_PIPE, KC_COLN
+#define _________________RAISE_L3__________________ KC_COLN, KC_PIPE, KC_TILD, KC_PLUS, KC_UNDS
 
 #define _________________RAISE_R1__________________ KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20
 #define _________________RAISE_R2__________________ KC_CIRC, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR
-#define _________________RAISE_R3__________________ KC_NDSH, KC_MDSH, KC_COMM, KC_DOT,  KC_SLSH
+#define _________________RAISE_R3__________________ KC_NDSH, KC_MDSH, KC_LT,   KC_GT,   KC_QUES
 
 #define __________________NAV_L1___________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________________NAV_L2___________________ XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END
