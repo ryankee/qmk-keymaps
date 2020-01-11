@@ -57,7 +57,7 @@ enum combo_events {
   MY_COMBO_L_T,
   MY_COMBO_L_W,
   MY_COMBO_M_T,
-  MY_COMBO_N_T,
+  MY_COMBO_J_F,
   MY_COMBO_O_W,
   MY_COMBO_R_U,
   MY_COMBO_R_Y,
@@ -103,7 +103,7 @@ const uint16_t PROGMEM combo_K_M[] = { KC_K, KC_M, COMBO_END };
 const uint16_t PROGMEM combo_L_T[] = { KC_L, KC_T, COMBO_END };
 const uint16_t PROGMEM combo_L_W[] = { KC_L, KC_W, COMBO_END };
 const uint16_t PROGMEM combo_M_T[] = { KC_M, KC_T, COMBO_END };
-const uint16_t PROGMEM combo_N_T[] = { KC_N, KC_T, COMBO_END };
+const uint16_t PROGMEM combo_J_F[] = { KC_J, KC_F, COMBO_END };
 const uint16_t PROGMEM combo_O_W[] = { KC_O, KC_W, COMBO_END };
 const uint16_t PROGMEM combo_R_U[] = { KC_R, KC_U, COMBO_END };
 const uint16_t PROGMEM combo_R_Y[] = { KC_R, KC_Y, COMBO_END };
@@ -153,7 +153,7 @@ combo_t key_combos[COMBO_COUNT] = {
   [MY_COMBO_L_T] = COMBO_ACTION(combo_L_T),
   [MY_COMBO_L_W] = COMBO_ACTION(combo_L_W),
   [MY_COMBO_M_T] = COMBO_ACTION(combo_M_T),
-  [MY_COMBO_N_T] = COMBO_ACTION(combo_N_T),
+  [MY_COMBO_J_F] = COMBO_ACTION(combo_J_F),
   [MY_COMBO_O_W] = COMBO_ACTION(combo_O_W),
   [MY_COMBO_R_U] = COMBO_ACTION(combo_R_U),
   [MY_COMBO_R_Y] = COMBO_ACTION(combo_R_Y),
@@ -376,7 +376,7 @@ void process_combo_event(uint8_t combo_index, bool pressed) {
         SEND_STRING("ment "); // Suffix
       }
       break;
-    case MY_COMBO_N_T:
+    case MY_COMBO_J_F:
       if (pressed) {
         leader_activate_or_cancel();
       }

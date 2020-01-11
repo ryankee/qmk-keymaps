@@ -29,9 +29,6 @@ void eeconfig_init_user(void) {
 }
 
 void matrix_init_user(void) {
-#ifdef STENO_ENABLE
-  steno_set_mode(STENO_MODE_GEMINI);
-#endif
 }
 
 void keyboard_post_init_user(void) {
@@ -81,7 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(SNAKE_LAYER);
       }
       return false;
-    case STENO:
+    case MIDI:
       if (record->event.pressed) {
 #ifdef AUDIO_ENABLE
         stop_all_notes();
@@ -90,15 +87,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(RAISE_LAYER);
         layer_off(LOWER_LAYER);
         layer_off(ADJUST_LAYER);
-        layer_on(STENO_LAYER);
+        layer_on(MIDI_LAYER);
       }
       return false;
-    case STN_EXIT:
+    case MIDI_EXIT:
       if (record->event.pressed) {
 #ifdef AUDIO_ENABLE
         PLAY_SONG(plover_gb_song);
 #endif
-        layer_off(STENO_LAYER);
+        layer_off(MIDI_LAYER);
       }
       return false;
     case SEND_VERSION:

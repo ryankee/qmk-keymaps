@@ -7,7 +7,7 @@ MIDI_ENABLE     = yes
 MOUSEKEY_ENABLE = yes
 NKRO_ENABLE     = yes
 DYNAMIC_MACRO_ENABLE = yes
-LEADER_ENABLE = yes
+COMBO_ENABLE = yes
 
 SRC += my.c
 

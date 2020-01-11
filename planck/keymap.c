@@ -189,25 +189,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, __________________GUI_L3___________________, __________________GUI_R3___________________, _______,
     _______, __________MEDIA__________, KC_BRID, KC_SLEP, KC_WAKE, KC_BRIU, __________VOLUME_________, _______
   ),
-
-  /* Stenography layer
-   *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-   *                 │  ⇥  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │
-   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │  ⌃  │     │  T  │  P  │  H  │     ┆     │  F  │  P  │  L  │  T  │  D  │
-   *                 ├─────┼╌ S ╌┼─────┼─────┼─────┼╌╌╌╌ * ╌╌╌╌┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │     │  K  │  W  │  R  │     ┆     │  R  │  B  │  G  │  S  │  Z  │
-   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │Exit │     │  ⌥  │  ⌘  │  A  │  O  │  E  │  U  │  ⌘  │  ⌥  │     │     │
-   *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
-   */
-  [STENO_LAYER] = LAYOUT_planck_grid_wrapper(
-    KC_TAB,  _________________STENO_L1__________________, _________________STENO_R1___________________________,
-    CTL_ESC, _________________STENO_L2__________________, _________________STENO_R2___________________________,
-    XXXXXXX, _________________STENO_L3__________________, _________________STENO_R3___________________________,
-    STN_EXIT,XXXXXXX, KC_LALT, KC_LGUI, ____STENO_AO____, ____STENO_EU____, KC_RGUI, KC_RALT, XXXXXXX, XXXXXXX
-  ),
-
   /* Keyboard settings layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *     Firmware -- │     │Reset│Make │     │     │     │     │     │     │     │Vers │     │
@@ -216,16 +197,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *        Audio -- │Colem│Voic-│Voic+│Mus +│Mus -│MIDI+│MIDI-│Aud +│Aud -│     │Play2│Rec 2│ -- Record/play macro 2
    *                 ├─────┼─────┼─────┼─────╆━━━━━╅─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┤
-   *                 │Steno│     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Toggl│Brig-│Brig+│Stop │ -- Stop recording macro
+   *                 |MIDI │     │     ┃     ┃  Toggle   ┃     ┃Toggl│Brig-│Brig+│Stop │ -- Stop recording macro
    *                 └─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┘
-   *                Swap GUI/Alt _/________/             \_____________\_ Backlight _/
+   *                                                     \_____________\_ Backlight _/
    */
   [ADJUST_LAYER] = LAYOUT_planck_grid_wrapper(
     XXXXXXX, RESET,   SEND_MAKE, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
-    QWERTY,  UC_M_LN, UC_M_OS,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
-    COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  LED_LEVEL, DYN_MACRO_PLAY2, DYN_REC_START2,
-    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   LIT_TOG, LIT_DEC, LIT_INC,         DYN_REC_STOP
+    QWERTY,  UC_M_LN, UC_M_OS,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, LED_LEVEL, DYN_MACRO_PLAY1, DYN_REC_START1,
+    COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  XXXXXXX,   XXXXXXX,  AU_ON,   AU_OFF, MU_MOD, DYN_MACRO_PLAY2, DYN_REC_START2,
+    MIDI,   XXXXXXX, XXXXXXX,   XXXXXXX,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   LIT_TOG, LIT_DEC, LIT_INC,         DYN_REC_STOP
+  ),
+
+  [MIDI_LAYER] = LAYOUT_planck_grid_wrapper(
+    MI_C_2, MI_Cs_2, MI_D_2, MI_Ds_2, MI_E_2, MI_F_2, MI_Fs_2, MI_G_2, MI_Gs_2, MI_A_2, MI_As_2, MI_B_2,
+    MI_C_1, MI_Cs_1, MI_D_1, MI_Ds_1, MI_E_1, MI_F_1, MI_Fs_1, MI_G_1, MI_Gs_1, MI_A_1, MI_As_1, MI_B_1,
+    MI_C, MI_Cs, MI_D, MI_Ds, MI_E, MI_F, MI_Fs, MI_G, MI_Gs, MI_A, MI_As, MI_B,
+    MI_SUS, MI_PORT, MI_SOST, MI_LEG, _______, MIDI_EXIT, MIDI_EXIT, _______, MI_MOD, MI_OCTU, MI_OCTD, MI_ALLOFF
   )
+
 };
 
 #ifdef RGB_MATRIX_ENABLE
@@ -249,39 +238,8 @@ void rgb_matrix_indicators_user(void) {
       // rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
       rgb_matrix_set_color(46, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
-    case STENO_LAYER:
-      rgb_matrix_set_color(36, 0xFF, 0x30, 0x00); // STN_EXIT
-
-      // Mask out everything but alphabetic steno keys.
-      rgb_matrix_set_color(0, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(1, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(2, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(3, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(4, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(5, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(6, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(7, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(8, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(9, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(10, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(11, 0x00, 0x00, 0x00);
-
-      rgb_matrix_set_color(12, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(17, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(18, 0x00, 0x00, 0x00);
-
-      rgb_matrix_set_color(24, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(29, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(30, 0x00, 0x00, 0x00);
-
-      rgb_matrix_set_color(37, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(38, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(39, 0x00, 0x00, 0x00);
-
-      rgb_matrix_set_color(45, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(46, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(47, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(48, 0x00, 0x00, 0x00);
+    case MIDI_LAYER:
+      rgb_matrix_set_color(41, 0x88, 0xFF, 0x00);
       break;
     case ADJUST_LAYER:
       planck_ez_left_led_on();
