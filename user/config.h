@@ -36,7 +36,9 @@
 #define DEFAULT_LED_BRIGHTNESS 0x99
 
 // Delay needed for rotary encoder to trigger media keys
-#define TAP_CODE_DELAY 10
+#define TAPPING_TERM 100
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
 #define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
 // Planck EZ colors
 #define ORYX_CONFIGURATOR
